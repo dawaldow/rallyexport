@@ -17,9 +17,9 @@ from pathlib import Path
 # VARIABLES YOU NEED TO SUPPLY
 # ============================================================
 WORKSPACE = "35536700027"
-PROJECT = "3c176728-29dd-417a-99e1-88522acdfe7f"
-TEAM_NAME = "Recyclops"  # no spaces, no special characters, just letters and numbers
-API_KEY = "_pXDT5gf1TTWpyyTtO5NqbOCFCJILhUVGkvgaPokukY"
+PROJECT = "<project id goes here>"
+TEAM_NAME = "<team name goes here>"  # no spaces, no special characters, just letters and numbers
+API_KEY = "<api key goes here>"
 
 # ============================================================
 # CONFIGURATION
