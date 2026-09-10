@@ -17,9 +17,9 @@ from pathlib import Path
 # VARIABLES YOU NEED TO SUPPLY
 # ============================================================
 WORKSPACE = "35536700027"
-PROJECT = "<project id goes here>"
-TEAM_NAME = "<team name goes here>"  # no spaces, no special characters, just letters and numbers
-API_KEY = "<api key goes here>"
+PROJECT = "project id goes here"
+TEAM_NAME = "team name goes here"  # no spaces, no special characters, just letters and numbers
+API_KEY = "api key goes here"
 
 # ============================================================
 # CONFIGURATION
