@@ -18,14 +18,21 @@ from pathlib import Path
 # =========================
 
 
+# =========================
+# GET .ENV VALUES
+# =========================
+
+
 def load_env_file():
     env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
 
     print("Loading:", env_path)
 
     if not os.path.exists(env_path):
-        print("File not found")
-        return
+        print("\nERROR: .env file was not found.")
+        print(f"Expected location: {env_path}")
+        print("Please create a .env file and populate the required settings.")
+        sys.exit(1)
 
     with open(env_path, encoding="utf-8") as f:
         for line in f:
@@ -38,7 +45,6 @@ def load_env_file():
                 continue
 
             key, value = line.split("=", 1)
-
             os.environ[key.strip()] = value.strip()
 
 
@@ -65,6 +71,29 @@ API_KEY = os.environ.get("API_KEY", "").strip()
 WORKSPACE = os.environ.get("WORKSPACE", "").strip()
 PROJECT = os.environ.get("PROJECT", "").strip()
 
+# Validate required variables
+missing = []
+
+if not TEAM_NAME:
+    missing.append("TEAM_NAME")
+
+if not API_KEY:
+    missing.append("API_KEY")
+
+if not WORKSPACE:
+    missing.append("WORKSPACE")
+
+if not PROJECT:
+    missing.append("PROJECT")
+
+if missing:
+    print("\nERROR: Required environment variables are missing.")
+    print("Missing values:")
+    for item in missing:
+        print(f"  - {item}")
+
+    print("\nPlease update your .env file and try again.")
+    sys.exit(1)
 
 # ============================================================
 # CONFIGURATION
