@@ -18,11 +18,6 @@ from pathlib import Path
 # =========================
 
 
-# =========================
-# GET .ENV VALUES
-# =========================
-
-
 def load_env_file():
     env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
 
