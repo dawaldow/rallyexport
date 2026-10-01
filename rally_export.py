@@ -13,17 +13,63 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
+# =========================
+# GET .ENV VALUES
+# =========================
+
+
+def load_env_file():
+    env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".env")
+
+    print("Loading:", env_path)
+
+    if not os.path.exists(env_path):
+        print("File not found")
+        return
+
+    with open(env_path, encoding="utf-8") as f:
+        for line in f:
+            line = line.strip()
+
+            if not line or line.startswith("#"):
+                continue
+
+            if "=" not in line:
+                continue
+
+            key, value = line.split("=", 1)
+
+            os.environ[key.strip()] = value.strip()
+
+
+# =========================
+# CERT HANDLING
+# =========================
+
+load_env_file()
+print("Working directory:", os.getcwd())
+print("Env exists:", os.path.exists(".env"))
+
+# Clear bad certificate environment variables
+os.environ.pop("SSL_CERT_FILE", None)
+os.environ.pop("REQUESTS_CA_BUNDLE", None)
+os.environ.pop("CURL_CA_BUNDLE", None)
+
+
 # ============================================================
 # VARIABLES YOU NEED TO SUPPLY
 # ============================================================
-WORKSPACE = "35536700027"
-PROJECT = "project id goes here"
-TEAM_NAME = "team name goes here"  # no spaces, no special characters, just letters and numbers
-API_KEY = "api key goes here"
+
+TEAM_NAME = os.environ.get("TEAM_NAME", "").strip()
+API_KEY = os.environ.get("API_KEY", "").strip()
+WORKSPACE = os.environ.get("WORKSPACE", "").strip()
+PROJECT = os.environ.get("PROJECT", "").strip()
+
 
 # ============================================================
 # CONFIGURATION
 # ============================================================
+
 RALLY_BASE_URL = "https://rally1.rallydev.com/slm/webservice/v2.0"
 INCLUDE_CHILD_PROJECTS = True
 PAGE_SIZE = 200
