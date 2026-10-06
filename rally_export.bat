@@ -10,9 +10,7 @@ echo.
 where py >nul 2>nul
 
 if %errorlevel%==0 (
-    py -3 rally_export.py
-) else (
-    python rally_export.py
+    rally_export.exe
 )
 
 if errorlevel 1 (
